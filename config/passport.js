@@ -12,6 +12,7 @@ module.exports = function (passport) {
     opts.issuer = jwtConfig.issuer;
     opts.audience = jwtConfig.audience;
     opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
+    // opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme("Bearer");
     passport.use(new JwtStrategy(opts, function (jwt_payload, done) {
         console.log("PAYLOAD: " + jwt_payload);
         User.findOne({username: jwt_payload.sub}, function (err, user) {
